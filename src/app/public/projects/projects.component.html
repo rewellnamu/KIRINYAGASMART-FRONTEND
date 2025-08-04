@@ -1,0 +1,24 @@
+<div class="projects-container">
+  <h2>Ongoing & Completed Projects</h2>
+
+  <!-- Search box -->
+  <input type="text" [(ngModel)]="searchText" placeholder="Search projects..." class="search-box" />
+
+  <div class="projects-grid">
+    <div *ngFor="let project of filteredProjects" class="project-card" (click)="viewProject(project)">
+      <h3>{{ project.name }}</h3>
+      <p>{{ project.description | slice:0:100 }}...</p>
+      <span>Status: {{ project.status }}</span>
+    </div>
+  </div>
+
+  <!-- Modal for viewing full content -->
+  <div class="modal" *ngIf="selectedProject">
+    <div class="modal-content slide-in">
+      <h2>{{ selectedProject.name }}</h2>
+      <p>{{ selectedProject.description }}</p>
+      <p><strong>Status:</strong> {{ selectedProject.status }}</p>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

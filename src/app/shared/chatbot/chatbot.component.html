@@ -1,0 +1,7 @@
+<div class="chatbot-container" [class.open]="isOpen">
+  <div class="chatbot-header" (click)="toggleChat()">Ask Kirinyaga AI</div>
+  <div class="chatbot-body" *ngIf="isOpen">
+    <div *ngFor="let msg of messages" [ngClass]="msg.type">{{ msg.text }}</div>
+    <input [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Type your question..." />
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.manage-container {
+  padding: 20px;
+  form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  input, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
+  button { padding: 8px 12px; background: #006400; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  button[type="button"] { background: #a00; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 10px; background: #f8f8f8; margin-bottom: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+  h4 { margin: 0; }
+}

@@ -1,0 +1,17 @@
+<div class="manage-container">
+  <h2>Manage Tenders</h2>
+  <form (ngSubmit)="saveTender()">
+    <input type="text" placeholder="Tender Title" [(ngModel)]="tender.title" name="title" required>
+    <textarea placeholder="Description" [(ngModel)]="tender.description" name="description" required></textarea>
+    <input type="date" placeholder="Deadline" [(ngModel)]="tender.deadline" name="deadline" required>
+    <button type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
+    <button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+  </form>
+  <ul>
+    <li *ngFor="let item of tenders">
+      <h4>{{ item.title }} <small>(Deadline: {{ item.deadline | date }})</small></h4>
+      <button (click)="editTender(item)">Edit</button>
+      <button (click)="deleteTender(item._id!)">Delete</button>
+    </li>
+  </ul>
+</div>

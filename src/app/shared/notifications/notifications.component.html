@@ -1,0 +1,13 @@
+<div class="notification-wrapper">
+  <div class="bell" (click)="toggleDropdown()">
+    🔔
+    <span class="count" *ngIf="notifications.length > 0">{{ notifications.length }}</span>
+  </div>
+
+  <div class="dropdown" *ngIf="showDropdown">
+    <p *ngIf="notifications.length === 0">No notifications</p>
+    <div *ngFor="let note of notifications" class="notification-item">
+      {{ note.message }}
+    </div>
+  </div>
+</div>

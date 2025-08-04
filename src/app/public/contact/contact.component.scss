@@ -1,0 +1,9 @@
+.contact-container {
+  max-width: 600px; margin: 0 auto; padding: 20px;
+  form { display: flex; flex-direction: column; gap: 15px; }
+  input, textarea { padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+  button { padding: 10px; background: #006400; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+  .success { color: green; margin-top: 10px; }
+  .error { color: red; margin-top: 10px; }
+  .auto-reply { margin-top: 15px; background: #f8f8f8; padding: 10px; border-radius: 5px; }
+}

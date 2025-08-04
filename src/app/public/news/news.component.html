@@ -1,0 +1,23 @@
+<div class="news-container">
+  <h2>Latest News</h2>
+  <input type="text" [(ngModel)]="searchText" placeholder="Search news..." class="search-bar" />
+
+  <div class="news-grid">
+    <div *ngFor="let news of filteredNews" 
+         class="news-card animate-fade-slide" 
+         (click)="viewNews(news)">
+      <h3>{{ news.title }}</h3>
+      <p>{{ news.summary }}</p>
+      <span>{{ news.createdAt | date }}</span>
+    </div>
+  </div>
+
+  <!-- Modal for viewing full content -->
+  <div class="modal" *ngIf="selectedNews">
+    <div class="modal-content animate-modal">
+      <h2>{{ selectedNews.title }}</h2>
+      <p>{{ selectedNews.content }}</p>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

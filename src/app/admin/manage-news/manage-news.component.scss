@@ -1,0 +1,86 @@
+/* Responsive and beautiful SCSS for manage-news.component.scss */
+
+:host {
+    display: block;
+    padding: 2rem;
+    background: #f8fafc;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.header {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.news-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: 600px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 900px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.news-card {
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    padding: 1.5rem;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &:hover {
+        box-shadow: 0 4px 16px rgba(44, 62, 80, 0.16);
+    }
+}
+
+.news-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #34495e;
+}
+
+.news-date {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.news-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background: #3498db;
+        color: #fff;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #217dbb;
+        }
+
+        &.delete {
+            background: #e74c3c;
+
+            &:hover {
+                background: #c0392b;
+            }
+        }
+    }
+}

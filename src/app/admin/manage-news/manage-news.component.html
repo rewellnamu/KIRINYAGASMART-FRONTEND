@@ -1,0 +1,16 @@
+<div class="manage-container">
+  <h2>Manage News</h2>
+  <form (ngSubmit)="saveNews()">
+    <input type="text" placeholder="Title" [(ngModel)]="news.title" name="title" required>
+    <textarea placeholder="Content" [(ngModel)]="news.content" name="content" required></textarea>
+    <button type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
+    <button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+  </form>
+  <ul>
+    <li *ngFor="let item of newsList">
+      <h4>{{ item.title }}</h4>
+      <button (click)="editNews(item)">Edit</button>
+      <button (click)="deleteNews(item._id!)">Delete</button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,59 @@
+.tenders-container {
+  padding: 20px;
+  h2 { text-align: center; margin-bottom: 20px; }
+  .tenders-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 15px; 
+    .tender-card { 
+      padding: 15px; 
+      background: #f8f8f8; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      transition: 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      &:hover { background: #e8f5e9; }
+      h3 { margin-bottom: 10px; }
+      span { font-size: 0.85rem; color: #555; }
+    }
+  }
+}
+
+.modal {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
+  .modal-content {
+    background: #fff; padding: 20px; border-radius: 8px; width: 90%; max-width: 600px;
+    button { margin-top: 15px; padding: 10px; background: #006400; color: #fff; border: none; border-radius: 5px; }
+  }
+}
+
+/* Animation for tenders cards */
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-slide {
+  animation: fadeSlideIn 0.5s ease-in-out forwards;
+}
+
+/* Modal zoom-in animation */
+@keyframes zoomIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-modal {
+  animation: zoomIn 0.3s ease-in-out;
+}
+.search-bar {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 0 auto 20px auto;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}

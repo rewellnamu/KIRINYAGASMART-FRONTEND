@@ -1,0 +1,17 @@
+<div class="manage-container">
+  <h2>Manage Projects</h2>
+  <form (ngSubmit)="saveProject()">
+    <input type="text" placeholder="Project Name" [(ngModel)]="project.name" name="name" required>
+    <textarea placeholder="Description" [(ngModel)]="project.description" name="description" required></textarea>
+    <input type="text" placeholder="Status (e.g., Ongoing, Completed)" [(ngModel)]="project.status" name="status" required>
+    <button type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
+    <button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+  </form>
+  <ul>
+    <li *ngFor="let item of projects">
+      <h4>{{ item.name }} <small>({{ item.status }})</small></h4>
+      <button (click)="editProject(item)">Edit</button>
+      <button (click)="deleteProject(item._id!)">Delete</button>
+    </li>
+  </ul>
+</div>

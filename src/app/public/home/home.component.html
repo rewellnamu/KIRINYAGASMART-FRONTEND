@@ -1,0 +1,115 @@
+<!-- home.component.html -->
+<div class="home-container">
+  <!-- Hero Section with Dynamic Background -->
+  <section class="hero-section" 
+           (mouseenter)="pauseSlideshow()" 
+           (mouseleave)="resumeSlideshow()">
+    
+    <!-- Background Image Layers -->
+    <div class="hero-backgrounds">
+      <div 
+        *ngFor="let bgImage of backgroundImages; let i = index"
+        class="hero-background"
+        [class.active]="i === currentImageIndex"
+        [style.background-image]="'url(' + bgImage.url + ')'"
+        [attr.aria-label]="bgImage.alt">
+      </div>
+    </div>
+
+    <!-- Overlay for better text readability -->
+    <div class="hero-overlay"></div>
+    
+    <!-- Floating shapes -->
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+         
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1>Kirinyaga Smart App</h1>
+      <p class="subtitle">Your Digital Gateway to County Services</p>
+      <p class="description">
+        Stay connected with the latest developments in Kirinyaga County. Access real-time information about government projects, news updates, tender opportunities, and essential county services all in one place.
+      </p>
+             
+      <div class="cta-buttons">
+        <a routerLink="/news" class="btn primary">Latest News</a>
+        <a routerLink="/projects" class="btn">View Projects</a>
+        <a routerLink="/tenders" class="btn">Browse Tenders</a>
+        <a routerLink="/contact" class="btn">Contact Us</a>
+      </div>
+
+      <!-- Optional: Image indicators (dots) -->
+      <div class="slideshow-indicators">
+        <button 
+          *ngFor="let bgImage of backgroundImages; let i = index"
+          class="indicator-dot"
+          [class.active]="i === currentImageIndex"
+          (click)="goToImage(i)"
+          [attr.aria-label]="'Go to image ' + (i + 1)">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Discover What We Offer</h2>
+      <p class="section-subtitle">
+        Comprehensive digital services designed to keep you informed and engaged with your county government
+      </p>
+             
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let feature of features">
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <h2 class="section-title">Kirinyaga County at a Glance</h2>
+      <div class="stats-grid">
+        <div class="stat-item" *ngFor="let stat of countyStats">
+          <span class="stat-number">{{ stat.number }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- County Info Section -->
+  <section class="county-info">
+    <div class="container">
+      <h2 class="section-title">About Kirinyaga County</h2>
+      <p class="section-subtitle">
+        Located in the heart of Kenya, Kirinyaga County is known for its rich agricultural heritage and commitment to sustainable development
+      </p>
+             
+      <div class="info-grid">
+        <div class="info-card" *ngFor="let info of countyInfo">
+          <h4>{{ info.title }}</h4>
+          <ul>
+            <li *ngFor="let item of info.items">{{ item }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="footer-cta">
+    <div class="container">
+      <h3>Stay Connected with Your County</h3>
+      <p>Join thousands of residents who stay informed about Kirinyaga County developments</p>
+      <a routerLink="/contact" class="btn primary">Get in Touch</a>
+    </div>
+  </section>
+</div>

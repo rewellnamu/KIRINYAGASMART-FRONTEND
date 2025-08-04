@@ -1,0 +1,24 @@
+<div class="tenders-container">
+  <h2>Available Tenders</h2>
+  <input type="text" [(ngModel)]="searchText" placeholder="Search tenders..." class="search-bar" />
+
+  <div class="tenders-grid">
+    <div *ngFor="let tender of filteredTenders" 
+         class="tender-card animate-fade-slide" 
+         (click)="viewTender(tender)">
+      <h3>{{ tender.title }}</h3>
+      <p>{{ tender.description | slice:0:100 }}...</p>
+      <span>Deadline: {{ tender.deadline | date }}</span>
+    </div>
+  </div>
+
+  <!-- Modal for viewing full content -->
+  <div class="modal" *ngIf="selectedTender">
+    <div class="modal-content animate-modal">
+      <h2>{{ selectedTender.title }}</h2>
+      <p>{{ selectedTender.description }}</p>
+      <p><strong>Deadline:</strong> {{ selectedTender.deadline | date }}</p>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
