@@ -2,68 +2,67 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px 30px;
   background: #006400;
-  padding: 10px 20px;
-  color: white;
+  color: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
 
   .logo a {
-    font-size: 20px;
-    color: white;
-    font-weight: bold;
+    color: #fff;
+    font-size: 1.5rem;
     text-decoration: none;
+    font-weight: bold;
   }
 
   .nav-links {
-    display: flex;
     list-style: none;
+    display: flex;
+    align-items: center;
     gap: 20px;
 
     li a {
-      color: white;
+      color: #fff;
       text-decoration: none;
-      font-weight: 500;
-      padding: 6px 8px;
-      transition: background 0.3s;
+      font-size: 1rem;
+      &:hover { text-decoration: underline; }
+    }
 
-      &.active,
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
+    .notifications-wrapper {
+      position: relative;
+
+      .notification-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        font-size: 1.5rem;
+
+        .badge {
+          position: absolute;
+          top: -8px;
+          right: -10px;
+          background: red;
+          color: white;
+          font-size: 0.8rem;
+          padding: 2px 6px;
+          border-radius: 50%;
+        }
       }
-    }
-  }
 
-  .menu-toggle {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  app-notifications {
-    margin-left: 20px;
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: #006400;
-      flex-direction: column;
-      width: 200px;
-      display: none;
-      padding: 20px;
-    }
-
-    .nav-links.active {
-      display: flex;
-    }
-
-    .menu-toggle {
-      display: block;
+      .notifications-dropdown {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 300px;
+        background: #fff;
+        color: #000;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        border-radius: 8px;
+        padding: 10px;
+        z-index: 1000;
+      }
     }
   }
 }

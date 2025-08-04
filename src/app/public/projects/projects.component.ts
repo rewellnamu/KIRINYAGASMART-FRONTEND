@@ -3,6 +3,7 @@ import { PublicService } from '../../shared/public.service';
 import { Project } from '../../models/project.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../../shared/notification.service'; // <-- Import
 
 @Component({
   selector: 'app-projects',
@@ -16,10 +17,22 @@ export class ProjectsComponent implements OnInit {
   selectedProject?: Project;
   searchText: string = '';
 
-  constructor(private publicService: PublicService) {}
-
-  ngOnInit() {
-    this.publicService.getProjects().subscribe(data => this.projects = data);
+  constructor(
+    private publicService: PublicService,
+    private notificationService: NotificationService,
+  ) {}
+  ngOnInit(): void {
+    this.loadProjects();
+  }
+  loadProjects() {
+    this.publicService.getProjects().subscribe({
+      next: (data: Project[]) => {
+        this.projects = data;
+      },
+      error: (error) => {
+        console.error('Error loading projects:', error);
+      }
+    });
   }
 
   get filteredProjects() {
@@ -35,5 +48,11 @@ export class ProjectsComponent implements OnInit {
 
   closeModal() {
     this.selectedProject = undefined;
+  }
+
+  showNotification(message: string) {
+    // Temporary simple alert
+    alert(message);
+    // Later: Replace with a toast notification
   }
 }
