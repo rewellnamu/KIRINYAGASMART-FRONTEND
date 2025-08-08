@@ -1,16 +1,25 @@
-<div class="manage-container">
+<div class="admin-section">
   <h2>Manage News</h2>
-  <form (ngSubmit)="saveNews()">
-    <input type="text" placeholder="Title" [(ngModel)]="news.title" name="title" required>
-    <textarea placeholder="Content" [(ngModel)]="news.content" name="content" required></textarea>
-    <button type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
-    <button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+
+  <!-- Add News -->
+  <form (ngSubmit)="createNews()">
+    <input [(ngModel)]="newNews.title" name="title" placeholder="Title" required />
+    <textarea [(ngModel)]="newNews.content" name="content" placeholder="Content" required></textarea>
+    <input [(ngModel)]="newNews.image" name="image" placeholder="Image URL" />
+    <button type="submit">Add News</button>
   </form>
-  <ul>
-    <li *ngFor="let item of newsList">
-      <h4>{{ item.title }}</h4>
-      <button (click)="editNews(item)">Edit</button>
-      <button (click)="deleteNews(item._id!)">Delete</button>
-    </li>
-  </ul>
+
+  <!-- News List -->
+  <table>
+    <thead>
+      <tr><th>Title</th><th>Published</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let n of newsList">
+        <td>{{ n.title }}</td>
+        <td>{{ n.publishedAt | date }}</td>
+        <td><button (click)="deleteNews(n._id!)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

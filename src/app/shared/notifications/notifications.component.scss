@@ -1,7 +1,50 @@
-.notification-item {
+.notifications {
   padding: 10px;
-  border-bottom: 1px solid #eee;
-  &:last-child { border-bottom: none; }
-  p { margin: 0; font-size: 0.95rem; }
-  small { color: #666; font-size: 0.8rem; }
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 250px;
+
+  h4 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #f9f9f9;
+      }
+
+      .message {
+        font-size: 0.95rem;
+        color: #333;
+      }
+
+      .time {
+        font-size: 0.8rem;
+        color: #888;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .empty {
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+    margin-top: 15px;
+  }
 }

@@ -3,15 +3,17 @@ import { NotificationService } from '../../shared/notification.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/auth.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
-  imports: [CommonModule]
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  notifications: string[] = [];
+  notifications: { message: string; date: Date; type: string }[] = [];
 
   constructor(
     private notificationService: NotificationService,
@@ -20,12 +22,19 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.notificationService.onNewNews((data) => this.notifications.push(`New News: ${data.title}`));
-    this.notificationService.onNewProject((data) => this.notifications.push(`New Project: ${data.name}`));
-    this.notificationService.onNewTender((data) => this.notifications.push(`New Tender: ${data.title}`));
+    this.notificationService.onNewNews((data: any) =>
+      this.notifications.unshift({ message: `New News: ${data.title}`, date: new Date(), type: 'news' })
+    );
+    this.notificationService.onNewProject((data: any) =>
+      this.notifications.unshift({ message: `New Project: ${data.name}`, date: new Date(), type: 'project' })
+    );
+    this.notificationService.onNewTender((data: any) =>
+      this.notifications.unshift({ message: `New Tender: ${data.title}`, date: new Date(), type: 'tender' })
+    );
   }
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

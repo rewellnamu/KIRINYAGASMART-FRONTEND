@@ -24,7 +24,7 @@ export class TendersComponent implements OnInit {
   get filteredTenders(): Tender[] {
     return this.tenders.filter(t =>
       t.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      t.description.toLowerCase().includes(this.searchText.toLowerCase())
+      t.description?.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
 
@@ -34,5 +34,10 @@ export class TendersComponent implements OnInit {
 
   closeModal() {
     this.selectedTender = undefined;
+  }
+   showNotification(message: string) {
+    // Temporary simple alert
+    alert(message);
+    // Later: Replace with a toast notification
   }
 }

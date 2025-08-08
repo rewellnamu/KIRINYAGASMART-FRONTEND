@@ -35,6 +35,11 @@ export class NewsComponent implements OnInit {
   }
 
   closeModal() {
-    this.selectedNews = undefined;
+    this.selectedNews = undefined;}
+
+     showNotification(message: string) {
+    // Temporary simple alert
+    alert(message);
+    // Later: Replace with a toast notification
   }
 }

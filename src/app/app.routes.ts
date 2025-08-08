@@ -17,10 +17,10 @@ export const routes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'tenders', component: TendersComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard/manage-news', component: ManageNewsComponent, canActivate: [AuthGuard] },
-{ path: 'dashboard/manage-projects', component: ManageProjectsComponent, canActivate: [AuthGuard] },
-{ path: 'dashboard/manage-tenders', component: ManageTendersComponent, canActivate: [AuthGuard] },
+  { path: 'manage-news', component: ManageNewsComponent, canActivate: [AuthGuard] },
+{ path: 'manage-projects', component: ManageProjectsComponent, canActivate: [AuthGuard] },
+{ path: 'manage-tenders', component: ManageTendersComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];

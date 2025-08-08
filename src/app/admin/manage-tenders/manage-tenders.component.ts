@@ -1,38 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../shared/admin.service';
-import { PublicService } from '../../shared/public.service';
-import { Tender } from '../../models/tender.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PublicService } from '../../shared/public.service';
+import { Tender } from '../../models/tender.model';
 
 @Component({
   selector: 'app-manage-tenders',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './manage-tenders.component.html',
-  styleUrls: ['./manage-tenders.component.scss'],
-  imports: [CommonModule, FormsModule]
+  styleUrls: ['./manage-tenders.component.scss']
 })
 export class ManageTendersComponent implements OnInit {
   tenders: Tender[] = [];
-  tender: Tender = { title: '', description: '', deadline: '' };
-  editingId: string | null = null;
+  newTender: Tender = { title: '', description: '', closingDate: new Date(), documentUrl: '' };
 
-  constructor(private adminService: AdminService, private publicService: PublicService) {}
+  constructor(private publicService: PublicService) {}
 
-  ngOnInit() { this.loadTenders(); }
-
-  loadTenders() { this.publicService.getTenders().subscribe(data => this.tenders = data); }
-
-  saveTender() {
-    if (this.editingId) {
-      this.adminService.updateTender(this.editingId, this.tender).subscribe(() => { this.loadTenders(); this.resetForm(); });
-    } else {
-      this.adminService.createTender(this.tender).subscribe(() => { this.loadTenders(); this.resetForm(); });
-    }
+  ngOnInit() {
+    this.loadTenders();
   }
 
-  editTender(tender: Tender) { this.tender = { ...tender }; this.editingId = tender._id || null; }
+  loadTenders() {
+    this.publicService.getTenders().subscribe(data => this.tenders = data);
+  }
 
-  deleteTender(id: string) { this.adminService.deleteTender(id).subscribe(() => this.loadTenders()); }
+  createTender() {
+    this.publicService.addTender(this.newTender).subscribe(() => {
+      this.loadTenders();
+      this.newTender = { title: '', description: '', closingDate: new Date(), documentUrl: '' };
+    });
+  }
 
-  resetForm() { this.tender = { title: '', description: '', deadline: '' }; this.editingId = null; }
+  deleteTender(id: string) {
+    this.publicService.deleteTender(id).subscribe(() => this.loadTenders());
+  }
 }

@@ -1,38 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../shared/admin.service';
-import { PublicService } from '../../shared/public.service';
-import { Project } from '../../models/project.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PublicService } from '../../shared/public.service';
+import { Project } from '../../models/project.model';
 
 @Component({
   selector: 'app-manage-projects',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './manage-projects.component.html',
-  styleUrls: ['./manage-projects.component.scss'],
-  imports: [CommonModule, FormsModule]
+  styleUrls: ['./manage-projects.component.scss']
 })
 export class ManageProjectsComponent implements OnInit {
   projects: Project[] = [];
-  project: Project = { name: '', description: '', status: '' };
-  editingId: string | null = null;
+  newProject: Project = { name: '', description: '', status: 'planned' };
 
-  constructor(private adminService: AdminService, private publicService: PublicService) {}
+  constructor(private publicService: PublicService) {}
 
-  ngOnInit() { this.loadProjects(); }
-
-  loadProjects() { this.publicService.getProjects().subscribe(data => this.projects = data); }
-
-  saveProject() {
-    if (this.editingId) {
-      this.adminService.updateProject(this.editingId, this.project).subscribe(() => { this.loadProjects(); this.resetForm(); });
-    } else {
-      this.adminService.createProject(this.project).subscribe(() => { this.loadProjects(); this.resetForm(); });
-    }
+  ngOnInit() {
+    this.loadProjects();
   }
 
-  editProject(project: Project) { this.project = { ...project }; this.editingId = project._id || null; }
+  loadProjects() {
+    this.publicService.getProjects().subscribe(data => this.projects = data);
+  }
 
-  deleteProject(id: string) { this.adminService.deleteProject(id).subscribe(() => this.loadProjects()); }
+  createProject() {
+    this.publicService.addProject(this.newProject).subscribe(() => {
+      this.loadProjects();
+      this.newProject = { name: '', description: '', status: 'planned' };
+    });
+  }
 
-  resetForm() { this.project = { name: '', description: '', status: '' }; this.editingId = null; }
+  deleteProject(id: string) {
+    this.publicService.deleteProject(id).subscribe(() => this.loadProjects());
+  }
 }

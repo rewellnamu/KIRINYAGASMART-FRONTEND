@@ -1,9 +1,13 @@
-<div *ngIf="notifications.length > 0; else noNotifications">
-  <div *ngFor="let n of notifications" class="notification-item">
-    <p>{{ n.message }}</p>
-    <small>{{ n.date | date:'short' }}</small>
-  </div>
+<div class="notifications">
+  <h4>Notifications</h4>
+  <ul *ngIf="notifications.length > 0; else emptyState">
+    <li *ngFor="let notification of notifications" (click)="openNotification(notification)">
+      <div class="message">{{ notification.message }}</div>
+      <div class="time">{{ notification.date | date:'short' }}</div>
+    </li>
+  </ul>
+
+  <ng-template #emptyState>
+    <p class="empty">No new notifications</p>
+  </ng-template>
 </div>
-<ng-template #noNotifications>
-  <p>No new notifications</p>
-</ng-template>

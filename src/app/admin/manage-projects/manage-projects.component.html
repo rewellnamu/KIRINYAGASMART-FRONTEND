@@ -1,17 +1,29 @@
-<div class="manage-container">
+<div class="admin-section">
   <h2>Manage Projects</h2>
-  <form (ngSubmit)="saveProject()">
-    <input type="text" placeholder="Project Name" [(ngModel)]="project.name" name="name" required>
-    <textarea placeholder="Description" [(ngModel)]="project.description" name="description" required></textarea>
-    <input type="text" placeholder="Status (e.g., Ongoing, Completed)" [(ngModel)]="project.status" name="status" required>
-    <button type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
-    <button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+
+  <!-- Add Project -->
+  <form (ngSubmit)="createProject()">
+    <input [(ngModel)]="newProject.name" name="name" placeholder="Name" required />
+    <textarea [(ngModel)]="newProject.description" name="description" placeholder="Description" required></textarea>
+    <select [(ngModel)]="newProject.status" name="status">
+      <option value="planned">Planned</option>
+      <option value="ongoing">Ongoing</option>
+      <option value="completed">Completed</option>
+    </select>
+    <button type="submit">Add Project</button>
   </form>
-  <ul>
-    <li *ngFor="let item of projects">
-      <h4>{{ item.name }} <small>({{ item.status }})</small></h4>
-      <button (click)="editProject(item)">Edit</button>
-      <button (click)="deleteProject(item._id!)">Delete</button>
-    </li>
-  </ul>
+
+  <!-- Project List -->
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of projects">
+        <td>{{ p.name }}</td>
+        <td>{{ p.status }}</td>
+        <td><button (click)="deleteProject(p._id!)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

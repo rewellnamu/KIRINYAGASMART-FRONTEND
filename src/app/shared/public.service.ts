@@ -11,35 +11,44 @@ export class PublicService {
 
   constructor(private http: HttpClient) {}
 
-  // News
+  // -------- NEWS --------
   getNews() {
     return this.http.get<News[]>(`${this.apiUrl}/news`);
   }
-
-  getNewsById(id: string) {
-    return this.http.get<News>(`${this.apiUrl}/news/${id}`);
+  addNews(news: News) {
+    return this.http.post<News>(`${this.apiUrl}/news`, news);
+  }
+  deleteNews(id: string) {
+    return this.http.delete(`${this.apiUrl}/news/${id}`);
   }
 
-  // Projects
+  // -------- PROJECTS --------
   getProjects() {
     return this.http.get<Project[]>(`${this.apiUrl}/projects`);
   }
-
-  getProjectById(id: string) {
-    return this.http.get<Project>(`${this.apiUrl}/projects/${id}`);
+  addProject(project: Project) {
+    return this.http.post<Project>(`${this.apiUrl}/projects`, project);
+  }
+  deleteProject(id: string) {
+    return this.http.delete(`${this.apiUrl}/projects/${id}`);
   }
 
-  // Tenders
+  // -------- TENDERS --------
   getTenders() {
     return this.http.get<Tender[]>(`${this.apiUrl}/tenders`);
   }
-
-  getTenderById(id: string) {
-    return this.http.get<Tender>(`${this.apiUrl}/tenders/${id}`);
+  addTender(tender: Tender) {
+    return this.http.post<Tender>(`${this.apiUrl}/tenders`, tender);
+  }
+  deleteTender(id: string) {
+    return this.http.delete(`${this.apiUrl}/tenders/${id}`);
   }
 
-  // Contact
+  // -------- CONTACT --------
   sendContact(contact: Contact) {
-    return this.http.post<{ message: string; autoReply: string }>(`${this.apiUrl}/contacts`, contact);
+    return this.http.post<{ message: string; autoReply: string }>(
+      `${this.apiUrl}/contacts`,
+      contact
+    );
   }
 }

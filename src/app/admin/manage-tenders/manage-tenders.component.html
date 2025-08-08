@@ -1,17 +1,26 @@
-<div class="manage-container">
+<div class="admin-section">
   <h2>Manage Tenders</h2>
-  <form (ngSubmit)="saveTender()">
-    <input type="text" placeholder="Tender Title" [(ngModel)]="tender.title" name="title" required>
-    <textarea placeholder="Description" [(ngModel)]="tender.description" name="description" required></textarea>
-    <input type="date" placeholder="Deadline" [(ngModel)]="tender.deadline" name="deadline" required>
-    <button type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
-    <button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+
+  <!-- Add Tender -->
+  <form (ngSubmit)="createTender()">
+    <input [(ngModel)]="newTender.title" name="title" placeholder="Title" required />
+    <textarea [(ngModel)]="newTender.description" name="description" placeholder="Description"></textarea>
+    <input type="date" [(ngModel)]="newTender.closingDate" name="closingDate" required />
+    <input [(ngModel)]="newTender.documentUrl" name="documentUrl" placeholder="Document URL" />
+    <button type="submit">Add Tender</button>
   </form>
-  <ul>
-    <li *ngFor="let item of tenders">
-      <h4>{{ item.title }} <small>(Deadline: {{ item.deadline | date }})</small></h4>
-      <button (click)="editTender(item)">Edit</button>
-      <button (click)="deleteTender(item._id!)">Delete</button>
-    </li>
-  </ul>
+
+  <!-- Tender List -->
+  <table>
+    <thead>
+      <tr><th>Title</th><th>Closing Date</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tenders">
+        <td>{{ t.title }}</td>
+        <td>{{ t.closingDate | date }}</td>
+        <td><button (click)="deleteTender(t._id!)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -1,7 +1,8 @@
 export interface News {
+  summary: any;
   _id?: string;
   title: string;
   content: string;
-  summary?: string;
-  createdAt?: string;
+  image?: string;
+  publishedAt?: Date;
 }

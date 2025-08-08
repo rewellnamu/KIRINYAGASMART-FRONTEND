@@ -12,14 +12,14 @@ import { NotificationService } from '../../shared/notification.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  notifications: any[] = [];
+  notifications: { message: string; date: Date; type: string }[] = [];
   unreadCount = 0;
   showNotifications = false;
 
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.notificationService.getNotifications().subscribe((notification) => {
+    this.notificationService.getNotifications().subscribe((notification: any) => {
       this.notifications.unshift(notification);
       this.unreadCount++;
     });

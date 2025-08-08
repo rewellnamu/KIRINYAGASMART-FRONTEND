@@ -8,7 +8,7 @@
          (click)="viewTender(tender)">
       <h3>{{ tender.title }}</h3>
       <p>{{ tender.description | slice:0:100 }}...</p>
-      <span>Deadline: {{ tender.deadline | date }}</span>
+      <span>Deadline: {{ tender.closingDate | date }}</span>
     </div>
   </div>
 
@@ -17,7 +17,7 @@
     <div class="modal-content animate-modal">
       <h2>{{ selectedTender.title }}</h2>
       <p>{{ selectedTender.description }}</p>
-      <p><strong>Deadline:</strong> {{ selectedTender.deadline | date }}</p>
+      <p><strong>Deadline:</strong> {{ selectedTender.closingDate | date }}</p>
       <button (click)="closeModal()">Close</button>
     </div>
   </div>

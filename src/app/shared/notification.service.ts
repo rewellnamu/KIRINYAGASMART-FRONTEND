@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
-import { Observable } from 'rxjs';
+
+export interface ProjectNotification { name: string; }
+export interface NewsNotification { title: string; }
+export interface TenderNotification { title: string; }
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
   private socket = io('http://localhost:5000');
+  getNotifications: any;
 
-  onNewNews(callback: (data: any) => void) {
+  onNewNews(callback: (data: NewsNotification) => void) {
     this.socket.on('new-news', callback);
   }
 
-  onNewProject(callback: (data: any) => void) {
+  onNewProject(callback: (data: ProjectNotification) => void) {
     this.socket.on('new-project', callback);
   }
 
-  onNewTender(callback: (data: any) => void) {
+  onNewTender(callback: (data: TenderNotification) => void) {
     this.socket.on('new-tender', callback);
-  }
-
-  getNotifications(): Observable<any> {
-    return new Observable((observer) => {
-      this.socket.on('notification', (data) => observer.next(data));
-    });
   }
 }

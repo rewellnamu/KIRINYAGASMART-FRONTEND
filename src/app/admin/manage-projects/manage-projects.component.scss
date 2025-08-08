@@ -1,10 +1,513 @@
-.manage-container {
-  padding: 20px;
-  form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-  input, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
-  button { padding: 8px 12px; background: #006400; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
-  button[type="button"] { background: #a00; }
-  ul { list-style: none; padding: 0; }
-  li { padding: 10px; background: #f8f8f8; margin-bottom: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
-  h4 { margin: 0; }
+/* Project Admin Section Styles */
+.admin-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.admin-section h2 {
+  color: #1e293b;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.admin-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-radius: 2px;
+}
+
+/* Form Styles */
+.admin-section form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 3rem;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-section form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);
+  border-radius: 12px 12px 0 0;
+}
+
+.admin-section form input,
+.admin-section form textarea,
+.admin-section form select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  background: #fafbfc;
+}
+
+.admin-section form input:focus,
+.admin-section form textarea:focus,
+.admin-section form select:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.admin-section form input::placeholder,
+.admin-section form textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.admin-section form textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+/* Custom Select Styling */
+.admin-section form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+.admin-section form select:hover {
+  border-color: #c4b5fd;
+}
+
+.admin-section form button[type="submit"] {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-section form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -8px rgba(139, 92, 246, 0.5);
+}
+
+.admin-section form button[type="submit"]:active {
+  transform: translateY(-1px);
+}
+
+.admin-section form button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.admin-section form button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+/* Table Styles */
+.admin-section table {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.admin-section table thead {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+}
+
+.admin-section table thead th {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  color: #374151;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.admin-section table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.admin-section table tbody tr:hover {
+  background: #f8fafc;
+  transform: scale(1.01);
+}
+
+.admin-section table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.admin-section table tbody td {
+  padding: 1.25rem 1.5rem;
+  color: #4b5563;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.admin-section table tbody td:first-child {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Status Badge Styling */
+.admin-section table tbody td:nth-child(2) {
+  font-weight: 600;
+  text-transform: capitalize;
+  position: relative;
+}
+
+/* Status-specific styling */
+.admin-section table tbody tr td:nth-child(2) {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.admin-section table tbody tr td:nth-child(2)::before {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6b7280;
+}
+
+/* Status indicators */
+.admin-section table tbody tr:has(td:nth-child(2):contains("planned")) td:nth-child(2)::before,
+.admin-section table tbody tr td:nth-child(2)[data-status="planned"]::before {
+  background: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.admin-section table tbody tr:has(td:nth-child(2):contains("ongoing")) td:nth-child(2)::before,
+.admin-section table tbody tr td:nth-child(2)[data-status="ongoing"]::before {
+  background: #06b6d4;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+}
+
+.admin-section table tbody tr:has(td:nth-child(2):contains("completed")) td:nth-child(2)::before,
+.admin-section table tbody tr td:nth-child(2)[data-status="completed"]::before {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Alternative status styling using classes (recommended) */
+.status-planned {
+  color: #92400e;
+  background: #fef3c7;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  border: 1px solid #f59e0b;
+}
+
+.status-ongoing {
+  color: #0c4a6e;
+  background: #cffafe;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  border: 1px solid #06b6d4;
+}
+
+.status-completed {
+  color: #065f46;
+  background: #d1fae5;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  border: 1px solid #10b981;
+}
+
+.admin-section table button {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.admin-section table button:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -8px rgba(239, 68, 68, 0.5);
+}
+
+.admin-section table button:active {
+  transform: translateY(-1px);
+}
+
+/* Empty State */
+.admin-section table tbody:empty::after {
+  content: 'No projects found. Add your first project using the form above.';
+  display: block;
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-section {
+    padding: 1rem;
+  }
+  
+  .admin-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .admin-section form {
+    padding: 1.5rem;
+  }
+  
+  .admin-section form input,
+  .admin-section form textarea,
+  .admin-section form select {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .admin-section form button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Mobile Table - Stack Layout */
+  .admin-section table,
+  .admin-section table thead,
+  .admin-section table tbody,
+  .admin-section table th,
+  .admin-section table td,
+  .admin-section table tr {
+    display: block;
+  }
+  
+  .admin-section table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  .admin-section table tbody tr {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-section table tbody tr:hover {
+    transform: none;
+  }
+  
+  .admin-section table tbody td {
+    border: none;
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 30%;
+  }
+  
+  .admin-section table tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 25%;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .admin-section table tbody td:nth-child(1)::before {
+    content: 'Name';
+  }
+  
+  .admin-section table tbody td:nth-child(2)::before {
+    content: 'Status';
+  }
+  
+  .admin-section table tbody td:nth-child(3)::before {
+    content: 'Actions';
+  }
+  
+  /* Mobile status styling */
+  .admin-section table tbody td:nth-child(2) {
+    padding-left: 30%;
+  }
+  
+  .admin-section table tbody tr td:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    left: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6b7280;
+  }
+  
+  .admin-section table button {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Loading States */
+.admin-section form button[type="submit"]:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.admin-section form button[type="submit"]:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Focus States for Accessibility */
+.admin-section form button[type="submit"]:focus,
+.admin-section form select:focus,
+.admin-section table button:focus {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Success/Error States */
+.admin-section .success-message {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #10b981;
+  font-weight: 500;
+}
+
+.admin-section .error-message {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #ef4444;
+  font-weight: 500;
+}
+
+/* Animation for new rows */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.admin-section table tbody tr {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Project-specific enhancements */
+.admin-section .project-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-section .stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-top: 3px solid transparent;
+}
+
+.admin-section .stat-card.planned {
+  border-top-color: #f59e0b;
+}
+
+.admin-section .stat-card.ongoing {
+  border-top-color: #06b6d4;
+}
+
+.admin-section .stat-card.completed {
+  border-top-color: #10b981;
+}
+
+.admin-section .stat-card h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.admin-section .stat-card p {
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }

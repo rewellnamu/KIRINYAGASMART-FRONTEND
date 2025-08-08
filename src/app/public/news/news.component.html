@@ -7,8 +7,8 @@
          class="news-card animate-fade-slide" 
          (click)="viewNews(news)">
       <h3>{{ news.title }}</h3>
-      <p>{{ news.summary }}</p>
-      <span>{{ news.createdAt | date }}</span>
+      <p>{{ news.content | slice:0:100 }}...</p>
+      <span>{{ news.publishedAt | date }}</span>
     </div>
   </div>
 

@@ -17,11 +17,11 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('adminToken');
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('adminToken');
     this.router.navigate(['/login']);
   }
 
