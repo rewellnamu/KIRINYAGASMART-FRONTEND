@@ -8,7 +8,10 @@ export interface TenderNotification { title: string; }
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
   private socket = io('http://localhost:5000');
-  getNotifications: any;
+
+  getNotifications() {
+    return this.socket; // Or whatever data you actually want to return
+  }
 
   onNewNews(callback: (data: NewsNotification) => void) {
     this.socket.on('new-news', callback);
