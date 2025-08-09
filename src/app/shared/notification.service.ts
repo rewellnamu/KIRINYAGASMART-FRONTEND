@@ -1,41 +1,39 @@
-import { Injectable } from '@angular/core';
-import { Observable, fromEvent, merge } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { io } from 'socket.io-client';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { io, Socket } from 'socket.io-client';
 
-export interface ProjectNotification { name: string; type: 'project'; }
-export interface NewsNotification { title: string; type: 'news'; }
-export interface TenderNotification { title: string; type: 'tender'; }
-
-type AllNotifications = ProjectNotification | NewsNotification | TenderNotification;
+export interface ProjectNotification { name: string; }
+export interface NewsNotification { title: string; }
+export interface TenderNotification { title: string; }
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  private socket = io('http://localhost:5000');
+  private socket?: Socket; // Optional because SSR won't init
 
-  getNotifications(): Observable<AllNotifications> {
-    const newsNotifications = fromEvent<NewsNotification>(this.socket, 'new-news')
-      .pipe(map(data => ({ ...data, type: 'news' as const })));
-    
-    const projectNotifications = fromEvent<ProjectNotification>(this.socket, 'new-project')
-      .pipe(map(data => ({ ...data, type: 'project' as const })));
-    
-    const tenderNotifications = fromEvent<TenderNotification>(this.socket, 'new-tender')
-      .pipe(map(data => ({ ...data, type: 'tender' as const })));
-
-    return merge(newsNotifications, projectNotifications, tenderNotifications);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      // Only connect socket in the browser
+      this.socket = io('http://localhost:5000');
+    }
   }
 
-  // Keep individual methods if needed
+  /** Get raw socket instance (if in browser) */
+  getNotifications() {
+    return this.socket;
+  }
+
+  /** Listen for new news */
   onNewNews(callback: (data: NewsNotification) => void) {
-    this.socket.on('new-news', callback);
+    this.socket?.on('new-news', callback);
   }
 
+  /** Listen for new projects */
   onNewProject(callback: (data: ProjectNotification) => void) {
-    this.socket.on('new-project', callback);
+    this.socket?.on('new-project', callback);
   }
 
+  /** Listen for new tenders */
   onNewTender(callback: (data: TenderNotification) => void) {
-    this.socket.on('new-tender', callback);
+    this.socket?.on('new-tender', callback);
   }
 }
